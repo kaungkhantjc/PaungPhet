@@ -19,6 +19,10 @@ return new class extends Migration {
             $table->timestamps();
 
             $table->unique(['wedding_id', 'slug']);
+            $table->index('created_at');
+            $table->index('updated_at');
+            $table->index('status');
+            $table->index('is_notable');
         });
     }
 

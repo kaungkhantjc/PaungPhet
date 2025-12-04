@@ -21,6 +21,9 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\RecordActionsPosition;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
@@ -94,13 +97,15 @@ class GuestResource extends Resource
                     ->badge()
                     ->state(fn(Model $record) => $record->status == 'seen' ? __('filament/admin/guest_resource.status_seen') : __('filament/admin/guest_resource.status_pending'))
                     ->color(fn(Model $record) => $record->status == 'seen' ? Color::Green : Color::Gray)
-                    ->toggleable(),
+                    ->toggleable()
+                    ->sortable(),
 
                 IconColumn::make('is_notable')
                     ->label(__('filament/admin/guest_resource.is_notable'))
                     ->boolean()
                     ->alignCenter()
-                    ->toggleable(),
+                    ->toggleable()
+                    ->sortable(),
 
                 IconColumn::make('note')
                     ->label(__('filament/admin/guest_resource.note'))
@@ -126,7 +131,23 @@ class GuestResource extends Resource
                     ->toggleable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options([
+                        'pending' => __('filament/admin/guest_resource.status_pending'),
+                        'seen' => __('filament/admin/guest_resource.status_seen'),
+                    ])
+                    ->label(__('filament/admin/guest_resource.status'))
+                    ->placeholder(__('filament/admin/panel.all')),
+
+                TernaryFilter::make('is_notable')
+                    ->label(__('filament/admin/guest_resource.is_notable'))
+                    ->trueLabel(__('filament/admin/guest_resource.is_notable_yes'))
+                    ->falseLabel(__('filament/admin/guest_resource.is_notable_no')),
+
+                Filter::make('has_note')
+                    ->label(__('filament/admin/guest_resource.has_note'))
+                    ->toggle()
+                    ->query(fn(Builder $query): Builder => $query->whereNotNull('note')),
             ])
             ->recordActions([
                 ActionGroup::make([

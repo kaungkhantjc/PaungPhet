@@ -52,7 +52,7 @@ class GuestController extends Controller
         $guest->note = $note;
         $guest->save();
 
-        return redirect()->route('guests.show', ['weddingSlug' => $weddingSlug, 'guestSlug' => $guestSlug])
+        return redirect()->route('guests.show', ['locale' => $locale, 'weddingSlug' => $weddingSlug, 'guestSlug' => $guestSlug])
             ->with('success', 'Note has been sent successfully.');
     }
 

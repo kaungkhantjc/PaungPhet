@@ -19,4 +19,8 @@ return [
     'status_pending' => 'Pending',
     'status_seen' => 'Seen',
 
+    'is_notable_yes' => 'Yes',
+    'is_notable_no' => 'No',
+    'has_note' => 'Has Note',
+
 ];

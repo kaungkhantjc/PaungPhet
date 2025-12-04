@@ -19,4 +19,8 @@ return [
     'status_pending' => 'မကြည့်ရသေး',
     'status_seen' => 'ကြည့်ပြီး',
 
+    'is_notable_yes' => 'ရှိသူများ',
+    'is_notable_no' => 'မရှိသူများ',
+    'has_note' => 'မင်္ဂလာစကား ပေးပို့ထားသူများ',
+
 ];
