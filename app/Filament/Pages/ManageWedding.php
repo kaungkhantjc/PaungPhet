@@ -14,7 +14,6 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
-use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
@@ -52,13 +51,28 @@ class ManageWedding extends Page implements HasForms
         $wedding = auth()->user()->wedding;
 
         if ($wedding) {
-            $this->form->fill($wedding->attributesToArray());
+            $data = $wedding->attributesToArray();
+
+            foreach ($wedding->getTranslatableAttributes() as $field) {
+                $data[$field] = $wedding->getTranslations($field);
+            }
+
+            $this->form->fill($data);
         } else {
             $this->form->fill([
                 'event_date' => now(),
-                'event_time' => __('filament/admin/manage_wedding.event_time_default'),
-                'address' => __('filament/admin/manage_wedding.address_default'),
-                'content' => __('filament/admin/manage_wedding.content_default'),
+                'event_time' => [
+                    'my' => __('filament/admin/manage_wedding.event_time_default', locale: 'my'),
+                    'en' => __('filament/admin/manage_wedding.event_time_default', locale: 'en'),
+                ],
+                'address' => [
+                    'my' => __('filament/admin/manage_wedding.address_default', locale: 'my'),
+                    'en' => __('filament/admin/manage_wedding.address_default', locale: 'en'),
+                ],
+                'content' => [
+                    'my' => __('filament/admin/manage_wedding.content_default', locale: 'my'),
+                    'en' => __('filament/admin/manage_wedding.content_default', locale: 'en'),
+                ],
             ]);
         }
     }
@@ -68,59 +82,71 @@ class ManageWedding extends Page implements HasForms
         return $schema
             ->statePath('data')
             ->model(Wedding::class)
-            ->columns()
+            ->columns(1)
             ->schema([
-                Section::make(__('filament/admin/manage_wedding.partners'))
+                Section::make(__('filament/admin/manage_wedding.wedding_details'))
                     ->columns()
                     ->schema([
-                        TextInput::make('partner_one')
-                            ->required()
-                            ->label(__('filament/admin/manage_wedding.partner_one'))
-                            ->placeholder(__('filament/admin/manage_wedding.partner_one_placeholder')),
-                        TextInput::make('partner_two')
-                            ->required()
-                            ->label(__('filament/admin/manage_wedding.partner_two'))
-                            ->placeholder(__('filament/admin/manage_wedding.partner_two_placeholder')),
                         TextInput::make('slug')
                             ->required()
                             ->unique(table: 'weddings', column: 'slug', ignorable: fn() => auth()->user()->wedding)
-                            ->prefix(config('app.url') . '/')
+                            ->prefix(config('app.url') . '/' . app()->getLocale() . '/')
                             ->placeholder('mg-and-may')
                             ->columnSpanFull(),
-                        RichEditor::make('content')
-                            ->label(__('filament/admin/manage_wedding.content'))
-                            ->fileAttachmentsDisk('public')
-                            ->fileAttachmentsDirectory('contents/' . auth()->id())
-                            ->fileAttachmentsVisibility('public')
-                            ->toolbarButtons([
-                                ['bold', 'italic', 'underline', 'strike', 'subscript', 'superscript', 'link'],
-                                ['h1', 'h2', 'h3', 'alignStart', 'alignCenter', 'alignEnd'],
-                                ['blockquote', 'codeBlock', 'bulletList', 'orderedList'],
-                                ['textColor', 'table', 'grid', 'attachFiles'],
-                                ['undo', 'redo'],
-                            ])
-                            ->columnSpanFull()
-                    ]),
 
-                Grid::make()->schema([
-                    Section::make(__('filament/admin/manage_wedding.wedding_details'))
-                        ->schema([
-                            DatePicker::make('event_date')
-                                ->label(__('filament/admin/manage_wedding.event_date'))
-                                ->live()
-                                ->hint(fn(Get $get) => Carbon::parse($get('event_date'))->translatedFormat(__('filament/admin/manage_wedding.event_date_format')))
-                                ->required(),
-                            TextInput::make('event_time')
-                                ->label(__('filament/admin/manage_wedding.event_time')),
-                            Textarea::make('address')
-                                ->label(__('filament/admin/manage_wedding.address'))
-                                ->rows(2),
-                            TextInput::make('address_url')
-                                ->label(__('filament/admin/manage_wedding.address_url'))
-                                ->placeholder('https://maps.app.goo.gl/...')
+                        DatePicker::make('event_date')
+                            ->label(__('filament/admin/manage_wedding.event_date'))
+                            ->live()
+                            ->hint(fn(Get $get) => Carbon::parse($get('event_date'))->translatedFormat(__('filament/admin/manage_wedding.event_date_format')))
+                            ->required(),
+                        TextInput::make('address_url')
+                            ->label(__('filament/admin/manage_wedding.address_url'))
+                            ->placeholder('https://maps.app.goo.gl/...')
 
-                        ]),
-                ])->columns(1),
+                    ])
+                    ->columnSpanFull(),
+
+                $this->createPartnerSection("မြန်မာစာဖြင့် ဖိတ်ကြားရန်", 'my'),
+                $this->createPartnerSection("Invitation in English", 'en'),
+            ]);
+    }
+
+    private function createPartnerSection(string $description, string $locale): Section
+    {
+        return Section::make(__('filament/admin/manage_wedding.partners', locale: $locale))
+            ->description($description)
+            ->columns()
+            ->schema([
+                TextInput::make("partner_one.$locale")
+                    ->required()
+                    ->label(__('filament/admin/manage_wedding.partner_one', locale: $locale))
+                    ->placeholder(__('filament/admin/manage_wedding.partner_one_placeholder', locale: $locale)),
+                TextInput::make("partner_two.$locale")
+                    ->required()
+                    ->label(__('filament/admin/manage_wedding.partner_two', locale: $locale))
+                    ->placeholder(__('filament/admin/manage_wedding.partner_two_placeholder', locale: $locale)),
+
+                RichEditor::make("content.$locale")
+                    ->label(__('filament/admin/manage_wedding.content', locale: $locale))
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDirectory('contents/' . auth()->id())
+                    ->fileAttachmentsVisibility('public')
+                    ->toolbarButtons([
+                        ['bold', 'italic', 'underline', 'strike', 'subscript', 'superscript', 'link'],
+                        ['h1', 'h2', 'h3', 'alignStart', 'alignCenter', 'alignEnd'],
+                        ['blockquote', 'codeBlock', 'bulletList', 'orderedList'],
+                        ['textColor', 'table', 'grid', 'attachFiles'],
+                        ['undo', 'redo'],
+                    ])
+                    ->columnSpanFull(),
+
+                TextInput::make("event_time.$locale")
+                    ->label(__('filament/admin/manage_wedding.event_time', locale: $locale))
+                    ->columnSpanFull(),
+                Textarea::make("address.$locale")
+                    ->label(__('filament/admin/manage_wedding.address', locale: $locale))
+                    ->rows(2)
+                    ->columnSpanFull(),
             ]);
     }
 

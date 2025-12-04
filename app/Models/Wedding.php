@@ -5,19 +5,31 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Translatable\HasTranslations;
 
 class Wedding extends Model
 {
+    use HasTranslations;
+
     protected $fillable = [
         'user_id',
+        'slug',
+        'event_date',
+        'address_url',
+
         'partner_one',
         'partner_two',
-        'slug',
         'content',
-        'event_date',
         'event_time',
-        'address',
-        'address_url',
+        'address'
+    ];
+
+    public array $translatable = [
+        'partner_one',
+        'partner_two',
+        'content',
+        'event_time',
+        'address'
     ];
 
     public function user(): BelongsTo

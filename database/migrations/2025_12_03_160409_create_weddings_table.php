@@ -11,14 +11,14 @@ return new class extends Migration {
         Schema::create('weddings', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->string('partner_one');
-            $table->string('partner_two');
             $table->string('slug')->unique()->index();
-            $table->text('content');
             $table->date('event_date');
-            $table->string('event_time')->nullable();
-            $table->string('address')->nullable();
             $table->string('address_url')->nullable();
+            $table->json('partner_one')->nullable();
+            $table->json('partner_two')->nullable();
+            $table->json('content')->nullable();
+            $table->json('event_time')->nullable();
+            $table->json('address')->nullable();
             $table->timestamps();
         });
     }

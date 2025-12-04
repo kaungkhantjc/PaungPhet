@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class GuestController extends Controller
 {
 
-    public function show(string $weddingSlug, string $guestSlug)
+    public function show(string $locale, string $weddingSlug, string $guestSlug)
     {
         $guest = Guest::where('slug', $guestSlug)
             ->with('wedding')
@@ -27,11 +27,12 @@ class GuestController extends Controller
 
         return view("themes.default", [
             'wedding' => $guest->wedding,
-            'guest' => $guest
+            'guest' => $guest,
+            'locale' => $locale,
         ]);
     }
 
-    public function submitNote(Request $request, string $weddingSlug, string $guestSlug)
+    public function submitNote(Request $request, string $locale, string $weddingSlug, string $guestSlug)
     {
         $guest = Guest::where('slug', $guestSlug)
             ->with('wedding')
