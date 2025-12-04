@@ -20,12 +20,14 @@ use Filament\Support\Colors\Color;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\RecordActionsPosition;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Unique;
+use Tapp\FilamentSocialShare\Actions\SocialShareAction;
 
 class GuestResource extends Resource
 {
@@ -127,12 +129,16 @@ class GuestResource extends Resource
                 //
             ])
             ->recordActions([
+                SocialShareAction::make()
+                    ->nativeBrowserShare()
+                    ->urlToShare(fn(Model $record) => route('guests.show', ['weddingSlug' => auth()->user()->wedding->slug, 'guestSlug' => $record->slug]))
+                    ->hiddenLabel(),
                 ActionGroup::make([
                     ViewAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),
                 ])
-            ])
+            ], RecordActionsPosition::BeforeColumns)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

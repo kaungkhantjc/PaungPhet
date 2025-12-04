@@ -22,8 +22,15 @@
         "mominalzaraa/filament-localization": "^1.0",
         "nunomaduro/collision": "^8.6",
         "pestphp/pest": "^4.1",
-        "pestphp/pest-plugin-laravel": "^4.0"
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "tapp/filament-social-share": "dev-main"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/EG-Mohamed/filament-social-share"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "App\\": "app/",
