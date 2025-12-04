@@ -4,20 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Wedding extends Model
+class Guest extends Model
 {
     protected $fillable = [
         'user_id',
-        'partner_one',
-        'partner_two',
+        'wedding_id',
+        'name',
         'slug',
-        'content',
-        'event_date',
-        'event_time',
-        'address',
-        'address_url',
+        'status',
+        'is_notable',
+        'note',
     ];
 
     public function user(): BelongsTo
@@ -25,15 +22,15 @@ class Wedding extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function guests(): HasMany
+    public function wedding(): BelongsTo
     {
-        return $this->hasMany(Guest::class);
+        return $this->belongsTo(Wedding::class);
     }
 
     protected function casts(): array
     {
         return [
-            'event_date' => 'date',
+            'is_notable' => 'boolean',
         ];
     }
 }
