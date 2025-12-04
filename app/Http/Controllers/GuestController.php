@@ -13,7 +13,7 @@ class GuestController extends Controller
     {
         $wedding = Wedding::where('slug', $weddingSlug)
             ->with('images:wedding_id,name,path')
-            ->with('guests', fn($query) => $query->where('slug', $guestSlug)->select('wedding_id', 'name', 'slug', 'status', 'is_notable'))
+            ->with('guests', fn($query) => $query->where('slug', $guestSlug)->select('wedding_id', 'name', 'slug', 'status', 'is_notable', 'note'))
             ->firstOrFail();
 
         // Ensure the wedding slug matches
@@ -57,7 +57,7 @@ class GuestController extends Controller
         $guest->save();
 
         return redirect()->route('guests.show', ['locale' => $locale, 'weddingSlug' => $weddingSlug, 'guestSlug' => $guestSlug])
-            ->with('success', 'Note has been sent successfully.');
+            ->with('success', __('theme.default.note_sent'));
     }
 
 

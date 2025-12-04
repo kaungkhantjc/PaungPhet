@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Forms\Components\RichEditor\RichContentRenderer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -59,6 +60,11 @@ class Wedding extends Model
     public function getOgImageUrlAttribute(): string
     {
         return Storage::disk('public')->url($this->og_image_path);
+    }
+
+    public function getContentRendererAttribute(): string
+    {
+        return RichContentRenderer::make($this->content)->toHtml();
     }
 
 }
