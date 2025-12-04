@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use App\Models\Wedding;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -11,13 +10,12 @@ return new class extends Migration {
     {
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Wedding::class)->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('slug')->index();
             $table->string('status');
             $table->boolean('is_notable');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->timestamps();
 
             $table->unique(['wedding_id', 'slug']);

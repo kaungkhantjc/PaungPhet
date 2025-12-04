@@ -8,12 +8,12 @@ return [
     'navigation_label' => 'ဖိတ်စာများ',
     'plural_model_label' => 'ဖိတ်စာများ',
 
-    'is_notable' => 'မင်္ဂလာစကား ရေးသားနိုင်ရန် ဖွင့်မည်',
+    'is_notable' => 'မင်္ဂလာစကား ရေးခွင့်',
     'name' => 'အမည်',
-    'note' => 'Note',
-    'slug' => 'Slug',
-    'status' => 'Status',
-    'user.name' => 'Name',
-    'wedding_id' => 'Wedding',
+    'note' => 'မင်္ဂလာစကား',
+    'status' => 'အခြေအနေ',
+
+    'status_pending' => 'မကြည့်ရသေး',
+    'status_seen' => 'ကြည့်ပြီး',
 
 ];

@@ -14,7 +14,12 @@ class ListGuests extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->mutateDataUsing(function (array $data) {
+                    $data['status'] = 'pending';
+                    $data['wedding_id'] = auth()->user()->wedding->id;
+                    return $data;
+                }),
         ];
     }
 

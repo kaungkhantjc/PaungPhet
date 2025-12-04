@@ -5,24 +5,26 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\GuestResource\Pages;
 use App\Models\Guest;
 use BackedEnum;
-use Closure;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 
 class GuestResource extends Resource
 {
@@ -38,28 +40,34 @@ class GuestResource extends Resource
         return $schema
             ->columns(1)
             ->components([
-                Checkbox::make('is_notable')
-                    ->label(__('filament/admin/guest_resource.is_notable'))
-                    ->columnSpanFull(),
-
                 TextInput::make('name')
                     ->label(__('filament/admin/guest_resource.name'))
                     ->required()
+                    ->visibleOn(['create', 'edit'])
                     ->live(debounce: 500)
                     ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
 
                 TextInput::make('slug')
                     ->required()
-                    ->label(__('filament/admin/guest_resource.slug'))
-                    ->unique(table: 'guests', column: 'slug', ignoreRecord: true, modifyRuleUsing: fn(Rule $rule, Closure $get) => $rule->where('wedding_id', $get('wedding_id')))
-                    ->prefix(config('app.url') . '/' . auth()->user()->wedding->slug . '/invite/')
-                    ->placeholder('uncle-hla'),
+                    ->visibleOn(['create', 'edit'])
+                    ->unique(table: 'guests', column: 'slug', ignoreRecord: true, modifyRuleUsing: fn(Unique $rule) => $rule->where('wedding_id', auth()->user()->wedding->id))
+                    ->prefix(config('app.url') . '/' . auth()->user()->wedding->slug . '/invite/'),
 
-                Textarea::make('note')
-                    ->visibleOn('edit')
+                TextEntry::make('status')
+                    ->label(__('filament/admin/guest_resource.status'))
+                    ->visibleOn('view')
+                    ->badge()
+                    ->state(fn(Model $record) => $record->status == 'seen' ? __('filament/admin/guest_resource.status_seen') : __('filament/admin/guest_resource.status_pending')),
+
+                Checkbox::make('is_notable')
+                    ->label(__('filament/admin/guest_resource.is_notable'))
+                    ->columnSpanFull()
+                    ->default(true),
+
+                TextEntry::make('note')
+                    ->visibleOn(['view'])
+                    ->default('~')
                     ->label(__('filament/admin/guest_resource.note'))
-                    ->rows(2)
-                    ->required()
                     ->columnSpanFull(),
             ]);
     }
@@ -68,39 +76,51 @@ class GuestResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('user.name')
-                    ->label(__('filament/admin/guest_resource.user.name'))
-                    ->searchable()
-                    ->sortable(),
-
-                TextColumn::make('wedding_id')
-                    ->label(__('filament/admin/guest_resource.wedding_id')),
-
                 TextColumn::make('name')
                     ->label(__('filament/admin/guest_resource.name'))
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('slug')
-                    ->label(__('filament/admin/guest_resource.slug'))
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
 
                 TextColumn::make('status')
-                    ->label(__('filament/admin/guest_resource.status')),
+                    ->label(__('filament/admin/guest_resource.status'))
+                    ->badge()
+                    ->state(fn(Model $record) => $record->status == 'seen' ? __('filament/admin/guest_resource.status_seen') : __('filament/admin/guest_resource.status_pending'))
+                    ->toggleable(),
 
-                TextColumn::make('is_notable')
-                    ->label(__('filament/admin/guest_resource.is_notable')),
+                IconColumn::make('is_notable')
+                    ->label(__('filament/admin/guest_resource.is_notable'))
+                    ->boolean()
+                    ->alignCenter()
+                    ->toggleable(),
 
-                TextColumn::make('note')
-                    ->label(__('filament/admin/guest_resource.note')),
+                TextColumn::make('updated_at')
+                    ->label(__('filament/admin/panel.updated_at'))
+                    ->dateTime()
+                    ->dateTimeTooltip('M j, Y g:i A')
+                    ->since()
+                    ->toggleable()
+                    ->sortable(),
+
+                TextColumn::make('created_at')
+                    ->label(__('filament/admin/panel.created_at'))
+                    ->dateTime('M j, Y g:i A')
+                    ->sortable()
+                    ->toggleable(),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                EditAction::make(),
-                DeleteAction::make(),
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make(),
+                ])
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
@@ -109,16 +129,16 @@ class GuestResource extends Resource
             ]);
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('wedding_id', auth()->user()->wedding->id);
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListGuests::route('/'),
         ];
-    }
-
-    public static function getGlobalSearchEloquentQuery(): Builder
-    {
-        return parent::getGlobalSearchEloquentQuery()->with(['user']);
     }
 
     public static function getGloballySearchableAttributes(): array
@@ -134,7 +154,7 @@ class GuestResource extends Resource
     public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [
-            'status' => $record->status,
+            __('filament/admin/guest_resource.status') => $record->status == 'seen' ? __('filament/admin/guest_resource.status_seen') : __('filament/admin/guest_resource.status_pending'),
         ];
     }
 
