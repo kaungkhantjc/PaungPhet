@@ -10,6 +10,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 class GuestStats extends StatsOverviewWidget
 {
     protected static ?int $sort = 1;
+    protected static bool $isLazy = false;
 
     /**
      * @return array<Stat>
@@ -18,28 +19,22 @@ class GuestStats extends StatsOverviewWidget
     {
         $wedding = auth()->user()->wedding;
 
-        // If the user hasn't set up a wedding yet, display zeros.
-        if (!$wedding) {
-            return [
-                Stat::make('Total Guests', 0)
-                    ->description('Setup your wedding first')
-                    ->icon(Heroicon::OutlinedUserGroup),
-                Stat::make('Guests Seen', 0)
-                    ->description('Invitations opened')
-                    ->icon(Heroicon::OutlinedEye),
-                Stat::make('Guests Pending', 0)
-                    ->description('Invitations not yet opened')
-                    ->icon(Heroicon::OutlinedEnvelope),
-            ];
+        if ($wedding) {
+            $guestQuery = $wedding->guests();
+            $totalGuests = $guestQuery->count();
+            $guestsSeen = $guestQuery->where('status', 'seen')->count();
+            $guestsPending = $totalGuests - $guestsSeen;
+
+            $seenPercentage = $totalGuests > 0 ? round(($guestsSeen / $totalGuests) * 100) : 0;
+            $seenColor = $seenPercentage >= 75 ? Color::Green : ($seenPercentage >= 50 ? Color::Orange : Color::Red);
+        } else {
+            $totalGuests = 0;
+            $guestsSeen = 0;
+            $guestsPending = 0;
+            $seenPercentage = 0;
+            $seenColor = Color::Gray;
         }
 
-        $guestQuery = $wedding->guests();
-        $totalGuests = $guestQuery->count();
-        $guestsSeen = $guestQuery->where('status', 'seen')->count();
-        $guestsPending = $totalGuests - $guestsSeen;
-
-        $seenPercentage = $totalGuests > 0 ? round(($guestsSeen / $totalGuests) * 100) : 0;
-        $seenColor = $seenPercentage >= 75 ? Color::Green : ($seenPercentage >= 50 ? Color::Orange : Color::Red);
 
         // --- Return Stats ---
         return [
