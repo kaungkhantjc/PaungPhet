@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'og_image' => 'ကာဗာပုံ',
     'address' => 'မင်္ဂလာ နေရာ',
     'address_default' => '~ ၏ နေအိမ်မင်္ဂလာမဏ္ဍပ်သို့',
     'address_url' => 'မင်္ဂလာ နေရာ Map URL',

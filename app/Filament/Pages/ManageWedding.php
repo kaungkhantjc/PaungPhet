@@ -7,6 +7,7 @@ use BackedEnum;
 use Carbon\Carbon;
 use Filament\Actions\Action;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -101,8 +102,19 @@ class ManageWedding extends Page implements HasForms
                             ->required(),
                         TextInput::make('address_url')
                             ->label(__('filament/admin/manage_wedding.address_url'))
-                            ->placeholder('https://maps.app.goo.gl/...')
+                            ->placeholder('https://maps.app.goo.gl/...'),
 
+                        FileUpload::make('og_image_path')
+                            ->label(__('filament/admin/manage_wedding.og_image'))
+                            ->directory('weddings/' . auth()->id() . '/og-images')
+                            ->disk('public')
+                            ->image()
+                            ->imageEditor()
+                            ->required()
+                            ->imageCropAspectRatio('16:9')
+                            ->maxSize(5 * 1024 * 1024)
+                            ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/jpg'])
+                            ->columnSpanFull()
                     ])
                     ->columnSpanFull(),
 
@@ -129,7 +141,7 @@ class ManageWedding extends Page implements HasForms
                 RichEditor::make("content.$locale")
                     ->label(__('filament/admin/manage_wedding.content', locale: $locale))
                     ->fileAttachmentsDisk('public')
-                    ->fileAttachmentsDirectory('contents/' . auth()->id())
+                    ->fileAttachmentsDirectory('weddings/' . auth()->id() . '/contents')
                     ->fileAttachmentsVisibility('public')
                     ->toolbarButtons([
                         ['bold', 'italic', 'underline', 'strike', 'subscript', 'superscript', 'link'],

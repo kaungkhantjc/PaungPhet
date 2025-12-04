@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Translatable\HasTranslations;
 
 class Wedding extends Model
@@ -16,6 +17,7 @@ class Wedding extends Model
         'slug',
         'event_date',
         'address_url',
+        'og_image_path',
 
         'partner_one',
         'partner_two',
@@ -48,4 +50,10 @@ class Wedding extends Model
             'event_date' => 'date',
         ];
     }
+
+    public function getOgImageUrlAttribute(): string
+    {
+        return Storage::disk('public')->url($this->og_image_path);
+    }
+
 }

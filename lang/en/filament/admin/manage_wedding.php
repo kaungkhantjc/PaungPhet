@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'og_image' => 'OG Image',
     'address' => 'Address',
     'address_default' => 'To the wedding pavilion at the residence of ~',
     'address_url' => 'Address Map URL',

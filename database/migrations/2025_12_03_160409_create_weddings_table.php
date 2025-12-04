@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string('slug')->unique()->index();
             $table->date('event_date');
+            $table->string('og_image_path');
             $table->string('address_url')->nullable();
             $table->json('partner_one')->nullable();
             $table->json('partner_two')->nullable();

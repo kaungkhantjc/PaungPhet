@@ -7,6 +7,8 @@
 </head>
 <body>
 <div>
+    <img src="{{ $wedding->og_image_url }}" alt="OG Image">
+
     <h4>{{ $wedding->partner_one }}</h4> & <h4>{{ $wedding->partner_two }}</h4>
 
     @if($guest->is_notable)
