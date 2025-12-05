@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PreweddingImageResource\Pages;
-use App\Models\PostImage;
 use App\Models\PreweddingImage;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
@@ -106,7 +105,7 @@ class PreweddingImageResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('wedding_id', auth()->user()->wedding->id);
+        return parent::getEloquentQuery()->where('wedding_id', auth()->user()->wedding?->id);
     }
 
     public static function getPages(): array
