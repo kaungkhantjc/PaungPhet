@@ -5,11 +5,11 @@
 - Copy `.env.example` to `.env`
 - Set up mysql database and configure it in the `.env` file
     ```dotenv
-    DB_DATABASE=phoosar
+    DB_DATABASE=paungphet
     DB_USERNAME=root
     DB_PASSWORD=
     ```
-- Replace `APP_URL` with the URL you will use to access the app (e.g. `https://phoosar.test`)
+- Replace `APP_URL` with the URL you will use to access the app (e.g. `https://paungphet.test`)
 - Install required packages and build assets
 
     ```shell
