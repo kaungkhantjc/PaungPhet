@@ -95,7 +95,7 @@
     <div class="max-w-3xl mx-auto -mt-20 relative z-20 px-4 pb-20 space-y-8">
 
         <div class="glass-panel border border-white/50 p-8 rounded-3xl shadow-xl">
-            <h2 class="font-script text-3xl text-center text-rose-600 mb-6">{{ __('theme/default.content_title') }}</h2>
+            <h2 class="font-script text-2xl text-center text-rose-600 mb-6">{{ __('theme/default.content_title') }}</h2>
             <div class="prose prose-rose prose-lg mx-auto text-center text-slate-600 leading-loose">
                 {!! $wedding->content_renderer !!}
             </div>
@@ -125,7 +125,7 @@
 
         @if($wedding->images->count() > 0)
             <div class="bg-white p-4 rounded-3xl shadow-sm overflow-hidden">
-                <h2 class="font-script text-4xl text-center text-rose-600 mb-6">{{ __('theme/default.prewedding_images_title') }}</h2>
+                <h2 class="font-script text-2xl text-center text-rose-600 mb-6">{{ __('theme/default.prewedding_images_title') }}</h2>
                 <div class="swiper mySwiper w-full h-[300px] md:h-[500px] rounded-xl">
                     <div class="swiper-wrapper">
                         @foreach($wedding->images as $image)
