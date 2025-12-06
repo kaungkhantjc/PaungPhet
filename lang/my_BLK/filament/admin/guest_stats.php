@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'total_guests' => 'ဖိတ်စာ စုစုပေါင်း',
-    'total_guests_description' => 'ဖိတ်ကြားထားသော အရေအတွက်',
-    'guests_seen' => 'ဖိတ်စာ ဖတ်ရှုသူများ',
-    'guests_pending' => 'ဖိတ်စာ မဖတ်ရှုရသေးသူများ',
-    'still_waiting_to_open' => 'ဖိတ်စာ ဖွင့်ရန် စောင့်နေဆဲ',
-    'n_of_total_guests' => 'ဖိတ်စာ စုစုပေါင်း၏ :count%',
+    'total_guests' => 'လိတ်ဖစ်ကားကအောဝ်ႏ',
+    'total_guests_description' => 'ကဖစ်ခါꩻလိုꩻဖြာꩻပေါင်ꩻ',
+    'guests_seen' => 'ဖတ်ထွားဒါႏလိတ်ဖစ်သား',
+    'guests_pending' => 'တထွားဗာႏဒွိုန်းလိတ်ဖစ်သား',
+    'still_waiting_to_open' => 'အဝ်ႏအုံးပွေါး',
+    'n_of_total_guests' => 'ထွားထွူသားနဝ်ꩻ :count%',
 ];

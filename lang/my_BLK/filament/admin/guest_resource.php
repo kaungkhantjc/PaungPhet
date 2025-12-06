@@ -1,27 +1,26 @@
 <?php
 
 return [
-    'label' => 'ဖိတ်စာများ',
-    'wedding_details_required' => 'မင်္ဂလာ အစီအစဥ်များကို အရင် ထည့်သွင်းပါ။',
-    'share_invitation_title' => ":name အား ခင်မင်လေးစားစွာ ဖိတ်ကြားအပ်ပါသည်။",
-    'share_my_url' => 'မြန်မာ URL မျှဝေမည်',
-    'share_my_BLK_url' => 'ပအိုဝ်း URL မျှဝေမည်',
-    'share_en_url' => 'English URL မျှဝေမည်',
+    'label' => 'လိတ်ဖစ်ဖုံႏ',
+    'wedding_details_required' => 'သော့ꩻလွေꩻရီးသွော့ မင်္ဂလာႏအခြပ်အရဲဉ်ႏဩ။',
+    'share_invitation_title' => ":name ဖစ်လောဝ်းဟွိုန်ဒျာႏဩ။",
+    'share_my_url' => 'ဖန်းဖြယ် မန်ႏ URL',
+    'share_my_BLK_url' => 'ဖန်းဖြယ် ပအိုဝ်ႏ URL',
+    'share_en_url' => 'ဖန်းဖြယ် အင်္ဂလိတ် URL',
 
-    'model_label' => 'ဖိတ်စာ',
-    'navigation_label' => 'ဖိတ်စာများ',
-    'plural_model_label' => 'ဖိတ်စာများ',
+    'model_label' => 'လိတ်ဖစ်',
+    'navigation_label' => 'လိတ်ဖစ်ဖုံး',
+    'plural_model_label' => 'လိတ်ဖစ်ဖုံး',
 
-    'is_notable' => 'မင်္ဂလာစကား ရေးခွင့်',
-    'name' => 'အမည်',
-    'note' => 'မင်္ဂလာစကား',
-    'status' => 'အခြေအနေ',
+    'is_notable' => 'ဖေႏအခွင်ꩻ တဲမ်းငေါဝ်းမင်္ဂလာႏ',
+    'name' => 'မဉ်ꩻ',
+    'note' => 'မင်္ဂလာႏငေါဝ်းငွါ',
+    'status' => 'အခေႏအနေႏ',
 
-    'status_pending' => 'မကြည့်ရသေး',
-    'status_seen' => 'ကြည့်ပြီး',
+    'status_pending' => 'ထွားဗာႏတောဝ်းဒွိုန်း',
+    'status_seen' => 'ထွားထွူလဲဉ်း',
 
-    'is_notable_yes' => 'ရှိသူများ',
-    'is_notable_no' => 'မရှိသူများ',
-    'has_note' => 'မင်္ဂလာစကား ပေးပို့ထားသူများ',
-
+    'is_notable_yes' => 'အခွင်ꩻအောဝ်ႏသား',
+    'is_notable_no' => 'အခွင်ꩻအောဝ်ႏတဝ်းသား',
+    'has_note' => 'ပသားခါꩻ ငေါဝ်းမင်္ဂလာႏသားဖုံး',
 ];

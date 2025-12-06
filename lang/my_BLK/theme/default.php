@@ -1,20 +1,19 @@
 <?php
 
 return [
-    'title' => ':partner_one နှင့် :partner_two တို့၏ မင်္ဂလာဧည့်ခံပွဲ',
-    'event_subtitle' => 'တို့၏ မင်္ဂလာဧည့်ခံပွဲ',
-    'invitee_subtitle' => 'အား ခင်မင်လေးစားစွာ ဖိတ်ကြားအပ်ပါသည်',
-    'content_title' => 'မင်္ဂလာဧည့်ခံပွဲ ဖိတ်ကြားလွှာ',
-    'prewedding_images_title' => 'အမှတ်တရ ဓာတ်ပုံများ',
-    'address' => 'မင်္ဂလာနေရာ',
-    'address_map_scan' => 'Map ကို scan ဖတ်ပါ',
-    'open_google_maps' => 'Google Maps ဖွင့်ရန်',
-    'add_to_calendar' => 'Calendar သို့ ထည့်ရန်',
+    'title' => ':partner_one တွမ်ႏ :partner_two သီး ပွယ်ꩻမင်္ဂလာႏစေနေင်းယာ',
+    'event_subtitle' => 'သီး ပွယ်ꩻမင်္ဂလာႏစေနေင်းယာ',
+    'invitee_subtitle' => 'ဖစ်လောဝ်းဟွိုန်ဒျာႏဩ',
+    'content_title' => 'ပွယ်ꩻမင်္ဂလာႏစေနေင်းယာ ဖစ်ဟွိုန်ဖူးဝေးဩ',
+    'prewedding_images_title' => 'အမတ်တရဓာတ်ပွုံꩻဖုံႏ',
+    'address' => 'မင်္ဂလာႏခင်ႏလမ်ႏ',
+    'address_map_scan' => 'Scan ဖတ်သွော့ QR Code ယိုဩ',
+    'open_google_maps' => 'ဗွောင်ထေ့လွေꩻ Google Maps',
+    'add_to_calendar' => 'သော့ꩻထေ့လွေꩻ Calendar ကို',
 
-    'note_title' => 'မင်္ဂလာစကား ပေးပို့ရန်',
-    'note_subtitle' => 'မင်္ဂလာမောင်နှံအတွက် မင်္ဂလာစကား ချီးမြင့်နိုင်ရန် ဖြစ်ပါသည်။',
-    'note_placeholder' => 'ဤနေရာတွင် မင်္ဂလာစကား ရေးသားနိုင်ပါသည် ..',
-    'btn_send_note' => 'ပေးပို့မည်',
-    'note_sent' => 'မင်္ဂလာစကား ပေးပို့ပြီးပါပြီ။',
-
+    'note_title' => 'ပသာဖေႏ မင်္ဂလာႏငေါဝ်းငွါ',
+    'note_subtitle' => 'မင်္ဂလာႏဆောင်ႏမူႏခိုသီးအတာႏ လက်ခွဉ်လွေꩻငေါဝ်းမင်္ဂလာႏတာႏဩ။',
+    'note_placeholder' => 'ငေါဝ်းမင်္ဂလာႏ တဲမ်းသွော့ယိုကိုဩ..',
+    'btn_send_note' => 'ပသာလွေꩻ',
+    'note_sent' => 'ငေါဝ်းမင်္ဂလာႏ ပသာသွူလဲဉ်းသြ။',
 ];
