@@ -4,7 +4,7 @@ return [
     'title' => ':partner_one တွမ်ႏ :partner_two သီး ပွယ်ꩻမင်္ဂလာႏစေနေင်းယာ',
     'event_subtitle' => 'သီး ပွယ်ꩻမင်္ဂလာႏစေနေင်းယာ',
     'invitee_subtitle' => 'ဖစ်လောဝ်းဟွိုန်ဒျာႏဩ',
-    'content_title' => 'ပွယ်ꩻမင်္ဂလာႏစေနေင်းယာ ဖစ်ဟွိုန်ဖူးဝေးဩ',
+    'content_title' => 'ပွယ်ꩻမင်္ဂလာႏစေနေင်းယာလိတ်ဖစ်',
     'prewedding_images_title' => 'အမတ်တရဓာတ်ပွုံꩻဖုံႏ',
     'address' => 'မင်္ဂလာႏခင်ႏလမ်ႏ',
     'address_map_scan' => 'Scan ဖတ်သွော့ QR Code ယိုဩ',
