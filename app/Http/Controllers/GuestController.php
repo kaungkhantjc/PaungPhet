@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Constants\SupportedLocale;
+use App\Constants\Theme;
 use App\Models\Guest;
 use App\Models\Wedding;
 use Illuminate\Http\Request;
@@ -10,12 +11,12 @@ use Illuminate\Http\Request;
 class GuestController extends Controller
 {
 
-    public function show(string $locale, string $weddingSlug)
+    public function show(Request $request, string $locale, string $weddingSlug)
     {
-        return $this->invite($locale, $weddingSlug, null);
+        return $this->invite($request, $locale, $weddingSlug, null);
     }
 
-    public function invite(string $locale, string $weddingSlug, ?string $guestSlug)
+    public function invite(Request $request, string $locale, string $weddingSlug, ?string $guestSlug)
     {
         $weddingQuery = Wedding::where('slug', $weddingSlug)
             ->with('images:wedding_id,name,path');
@@ -40,11 +41,17 @@ class GuestController extends Controller
             $guest->save();
         }
 
-        return view("themes.default", [
+        $theme = $request->query('theme', Theme::default()->value);
+        if (!in_array($theme, Theme::values())) {
+            $theme = Theme::default()->value;
+        }
+
+        return view("themes.$theme", [
             'wedding' => $wedding,
             'guest' => $guest,
             'locale' => $locale,
-            'supportedLocales' => SupportedLocale::all()
+            'supportedLocales' => SupportedLocale::all(),
+            'theme' => $theme,
         ]);
     }
 
