@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9613d6818c0a37bf40a632ceb76d11c",
+    "content-hash": "87c0808f31584573a8179ccbea5deb9a",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -5809,17 +5809,11 @@
         },
         {
             "name": "stijnvanouplines/blade-country-flags",
-            "version": "1.0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/stijnvanouplines/blade-country-flags.git",
-                "reference": "a1503171f666408398824b4dce0eea0e587ed6bc"
-            },
+            "version": "dev-main",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/stijnvanouplines/blade-country-flags/zipball/a1503171f666408398824b4dce0eea0e587ed6bc",
-                "reference": "a1503171f666408398824b4dce0eea0e587ed6bc",
-                "shasum": ""
+                "type": "path",
+                "url": "/Users/htetznaing/Downloads/blade-country-flags",
+                "reference": "a1503171f666408398824b4dce0eea0e587ed6bc"
             },
             "require": {
                 "blade-ui-kit/blade-icons": "^1.0",
@@ -5844,22 +5838,25 @@
                     "StijnVanouplines\\BladeCountryFlags\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "StijnVanouplines\\BladeCountryFlags\\Tests\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
             "description": "A package to easily make use of country flags in your Laravel Blade views.",
             "homepage": "https://github.com/stijnvanouplines/blade-country-flags",
             "keywords": [
-                "blade",
-                "country flags",
-                "laravel"
+                "Blade",
+                "Country flags",
+                "Laravel"
             ],
-            "support": {
-                "issues": "https://github.com/stijnvanouplines/blade-country-flags/issues",
-                "source": "https://github.com/stijnvanouplines/blade-country-flags/tree/1.0.6"
-            },
-            "time": "2025-04-22T06:40:23+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": false
+            }
         },
         {
             "name": "symfony/clock",
@@ -12489,9 +12486,17 @@
             "time": "2025-10-29T15:56:20+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "stijnvanouplines/blade-country-flags",
+            "version": "dev-main",
+            "alias": "1.0.6",
+            "alias_normalized": "1.0.6.0"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "stijnvanouplines/blade-country-flags": 20,
         "tapp/filament-social-share": 20
     },
     "prefer-stable": true,
@@ -12500,5 +12505,5 @@
         "php": "^8.4"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }
