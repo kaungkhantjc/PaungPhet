@@ -18,7 +18,8 @@ enum SupportedLocale: string
     public function flag(): string
     {
         return match ($this) {
-            self::MY, self::MY_BLK => 'mm',
+            self::MY => 'mm',
+            self::MY_BLK => 'blk',
             default => 'us',
         };
     }

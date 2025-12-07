@@ -38,10 +38,7 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/KhunHtetzNaing/blade-country-flags",
-            "options": {
-                "symlink": true
-            }
+            "url": "https://github.com/KhunHtetzNaing/blade-country-flags"
         }
     ],
     "autoload": {

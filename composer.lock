@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0364e6e88310d1f088b67c74c41fd6ff",
+    "content-hash": "faa9d0d792f23e18563323f1860e8b89",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -5813,12 +5813,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KhunHtetzNaing/blade-country-flags.git",
-                "reference": "3aaecf8131aea8223451814e233b3f0c6a9c363a"
+                "reference": "de63a0cf6109fb44cdf4ecc8fb207334d575a179"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KhunHtetzNaing/blade-country-flags/zipball/3aaecf8131aea8223451814e233b3f0c6a9c363a",
-                "reference": "3aaecf8131aea8223451814e233b3f0c6a9c363a",
+                "url": "https://api.github.com/repos/KhunHtetzNaing/blade-country-flags/zipball/de63a0cf6109fb44cdf4ecc8fb207334d575a179",
+                "reference": "de63a0cf6109fb44cdf4ecc8fb207334d575a179",
                 "shasum": ""
             },
             "require": {
@@ -5863,7 +5863,7 @@
             "support": {
                 "source": "https://github.com/KhunHtetzNaing/blade-country-flags/tree/main"
             },
-            "time": "2025-12-07T14:49:14+00:00"
+            "time": "2025-12-07T16:45:25+00:00"
         },
         {
             "name": "symfony/clock",
@@ -6633,16 +6633,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v7.4.0",
+            "version": "v7.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "769c1720b68e964b13b58529c17d4a385c62167b"
+                "reference": "bd1af1e425811d6f077db240c3a588bdb405cd27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/769c1720b68e964b13b58529c17d4a385c62167b",
-                "reference": "769c1720b68e964b13b58529c17d4a385c62167b",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/bd1af1e425811d6f077db240c3a588bdb405cd27",
+                "reference": "bd1af1e425811d6f077db240c3a588bdb405cd27",
                 "shasum": ""
             },
             "require": {
@@ -6691,7 +6691,7 @@
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-foundation/tree/v7.4.0"
+                "source": "https://github.com/symfony/http-foundation/tree/v7.4.1"
             },
             "funding": [
                 {
@@ -6711,7 +6711,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-13T08:49:24+00:00"
+            "time": "2025-12-07T11:13:10+00:00"
         },
         {
             "name": "symfony/http-kernel",
