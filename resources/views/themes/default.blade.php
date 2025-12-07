@@ -107,7 +107,7 @@
                 <div class="flex flex-col items-center p-2">
                     <x-heroicon-o-calendar class="w-8 h-8 text-rose-600 mb-2"/>
                     <span
-                        class="text-sm font-medium">{{ $wedding->event_date->translatedFormat(__('filament/admin/manage_wedding.event_date_format')) }}</span>
+                        class="text-sm font-medium">{{ $wedding->event_date->locale($locale)->translatedFormat(__('filament/admin/manage_wedding.event_date_format')) }}</span>
                 </div>
 
                 <div class="flex flex-col items-center p-2 pt-6 md:pt-2">
