@@ -98,14 +98,17 @@
                     {{ $wedding->partner_two }}
                 </h1>
 
-                <p class="uppercase tracking-[0.2em] text-xs md:text-sm mb-4 opacity-90 font-light">
+                <p class="uppercase tracking-[0.1em] md:tracking-[0.2em] text-xs md:text-sm mb-4 opacity-90 font-light">
                     {{ __('theme/default.event_subtitle') }}</p>
 
                 <div
                     class="mt-8 glass-panel text-pink-500 inline-block px-8 py-3 rounded-[3rem] shadow-lg shadow-pink-200/20">
-                    <p class="text-xl md:text-2xl font-semibold tracking-wide">{{ $guest->name }}</p>
-                    <p class="mt-1 text-[10px] uppercase tracking-widest text-gray-700 font-medium">
-                        {{ __('theme/default.invitee_subtitle') }}</p>
+                    @if($guest)
+                        <p class="text-xl md:text-2xl font-semibold tracking-wide">{{ $guest->name }}</p>
+                        <p class="mt-2 text-xs md:text-md uppercase tracking-widest text-gray-700 font-medium">{{ __('theme/default.invitee_subtitle') }}</p>
+                    @else
+                        <p class="text-sm md:text-md uppercase tracking-widest text-gray-700 font-medium">{{ __('theme/default.all_invitees_subtitle') }}</p>
+                   @endif
                 </div>
             </div>
         </div>
@@ -113,7 +116,7 @@
         <div class="max-w-3xl mx-auto -mt-20 relative z-20 px-4 pb-20 space-y-10">
 
             <div class="glass-panel p-10 rounded-[2.5rem] shadow-xl shadow-pink-100/60 ring-1 ring-white/60">
-                <h2 class="font-script text-4xl text-center text-pink-400 mb-6">{{ __('theme/default.content_title') }}
+                <h2 class="font-script text-4xl leading-normal text-center text-pink-400 mb-6">{{ __('theme/default.content_title') }}
                 </h2>
                 <div class="prose prose-pink mx-auto text-center text-slate-600 leading-loose font-light">
                     {!! $wedding->content_renderer !!}
@@ -205,7 +208,7 @@
                 </div>
             @endif
 
-            @if($guest->is_notable)
+            @if($guest&& $guest->is_notable)
                 @if($guest->note)
                     <div
                         class="bg-green-50/80 backdrop-blur-sm text-green-600 p-6 rounded-[2rem] text-center border border-green-100 mb-4 shadow-sm">
@@ -219,13 +222,16 @@
                             {{ __('theme/default.note_subtitle') }}</p>
 
                         @if(session('success'))
-                            <div class="bg-green-50 text-green-600 p-4 rounded-2xl text-center border border-green-100 mb-4">
+                            <div
+                            class="bg-green-50 text-green-600 p-4 rounded-2xl text-center border border-green-100 mb-4">
                                 {{ session('success') }}
                             </div>
                         @elseif(\Illuminate\Support\Str::of($guest->note)->trim()->isNotEmpty())
-                            <div class="bg-pink-50/50 p-8 rounded-[2rem] text-center italic text-pink-800 border border-pink-100">
+                            <div
+                            class="bg-pink-50/50 p-8 rounded-[2rem] text-center italic text-pink-800 border border-pink-100">
                                 "{{ $guest->note }}"
-                                <div class="mt-4 text-xs text-pink-300 font-bold uppercase not-italic tracking-wider">
+                                <div
+                                class="mt-4 text-xs text-pink-300 font-bold uppercase not-italic tracking-wider">
                                     {{ __('theme/default.note_sent') }}</div>
                             </div>
                         @else

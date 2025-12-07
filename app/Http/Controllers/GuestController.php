@@ -9,28 +9,38 @@ use Illuminate\Http\Request;
 class GuestController extends Controller
 {
 
-    public function show(string $locale, string $weddingSlug, string $guestSlug)
+    public function show(string $locale, string $weddingSlug)
     {
-        $wedding = Wedding::where('slug', $weddingSlug)
-            ->with('images:wedding_id,name,path')
-            ->with('guests', fn($query) => $query->where('slug', $guestSlug)->select('id', 'wedding_id', 'name', 'slug', 'status', 'is_notable', 'note'))
-            ->firstOrFail();
+        return $this->invite($locale, $weddingSlug, null);
+    }
 
-        // Ensure the wedding slug matches
-        if ($wedding->guests->isEmpty()) {
+    public function invite(string $locale, string $weddingSlug, ?string $guestSlug)
+    {
+        $weddingQuery = Wedding::where('slug', $weddingSlug)
+            ->with('images:wedding_id,name,path');
+
+        // Load guest if slug is provided
+        if ($guestSlug) {
+            $weddingQuery->with('guests', fn($query) => $query->where('slug', $guestSlug)->select('id', 'wedding_id', 'name', 'slug', 'status', 'is_notable', 'note'));
+        }
+
+        $wedding = $weddingQuery->firstOrFail();
+
+        // Ensure the wedding slug matches if slug provided
+        if ($guestSlug && $wedding->guests->isEmpty()) {
             abort(404);
         }
 
-        $guest = $wedding->guests->first();
+        $guest = $guestSlug ? $wedding->guests->first() : null;
 
-        // Update guest status if pending
-        if ($guest->status === 'pending') {
+        // Update guest status if the slug provided and the status is pending
+        if ($guestSlug && $guest->status === 'pending') {
             $guest->status = 'seen';
             $guest->save();
         }
 
         return view("themes.default", [
-            'wedding' => $guest->wedding,
+            'wedding' => $wedding,
             'guest' => $guest,
             'locale' => $locale,
         ]);

@@ -175,7 +175,7 @@ class GuestResource extends Resource
             ->label($label)
             ->tooltip(null)
             ->text(fn(Model $record) => __('filament/admin/guest_resource.share_invitation_title', ['name' => $record->name], locale: $locale))
-            ->urlToShare(fn(Model $record) => route('guests.show', ['locale' => $locale, 'weddingSlug' => auth()->user()->wedding->slug, 'guestSlug' => $record->slug]));
+            ->urlToShare(fn(Model $record) => route('guests.invite', ['locale' => $locale, 'weddingSlug' => auth()->user()->wedding->slug, 'guestSlug' => $record->slug]));
     }
 
     public static function getEloquentQuery(): Builder

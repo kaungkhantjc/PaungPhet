@@ -6,6 +6,7 @@ use App\Models\Wedding;
 use BackedEnum;
 use Carbon\Carbon;
 use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -15,11 +16,14 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
+use Filament\Support\Enums\VerticalAlignment;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\Support\Htmlable;
+use Tapp\FilamentSocialShare\Actions\SocialShareAction;
 
 /**
  * @property Schema $form
@@ -81,6 +85,16 @@ class ManageWedding extends Page implements HasForms
         }
     }
 
+    private function createShareAction(string $label, string $locale): SocialShareAction
+    {
+        return SocialShareAction::make($label)
+            ->nativeBrowserShare()
+            ->label($label)
+            ->tooltip(null)
+            ->text(__('filament/admin/guest_resource.share_wedding_url_title'))
+            ->urlToShare(fn() => route('guests.show', ['locale' => $locale, 'weddingSlug' => $this->form->getState()['slug'] ?? '']));
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema
@@ -91,12 +105,21 @@ class ManageWedding extends Page implements HasForms
                 Section::make(__('filament/admin/manage_wedding.wedding_details'))
                     ->columns()
                     ->schema([
-                        TextInput::make('slug')
-                            ->required()
-                            ->unique(table: 'weddings', column: 'slug', ignorable: fn() => auth()->user()->wedding)
-                            ->prefix(config('app.url') . '/' . app()->getLocale() . '/')
-                            ->placeholder('mg-and-may')
-                            ->columnSpanFull(),
+                        Flex::make([
+                            TextInput::make('slug')
+                                ->inlineLabel()
+                                ->required()
+                                ->unique(table: 'weddings', column: 'slug', ignorable: fn() => auth()->user()->wedding)
+                                ->prefix(config('app.url') . '/' . app()->getLocale() . '/')
+                                ->placeholder('mg-and-may')
+                                ->grow(),
+                            ActionGroup::make([
+                                self::createShareAction(label: __('filament/admin/guest_resource.share_en_url'), locale: 'en'),
+                                self::createShareAction(label: __('filament/admin/guest_resource.share_my_url'), locale: 'my'),
+                                self::createShareAction(label: __('filament/admin/guest_resource.share_my_BLK_url'), locale: 'my_BLK'),
+                            ])->icon(Heroicon::OutlinedShare)
+                                ->label(' - '),
+                        ])->columnSpanFull()->verticalAlignment(VerticalAlignment::Center),
 
                         DatePicker::make('event_date')
                             ->label(__('filament/admin/manage_wedding.event_date'))

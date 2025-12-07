@@ -11,6 +11,7 @@ Route::get('/', function () {
 Route::prefix('{locale}')
     ->middleware(SetLocale::class)
     ->group(function () {
-        Route::get('/{weddingSlug}/invite/{guestSlug}', [GuestController::class, 'show'])->name('guests.show');
+        Route::get('/{weddingSlug}', [GuestController::class, 'show'])->name('guests.show');
+        Route::get('/{weddingSlug}/invite/{guestSlug}', [GuestController::class, 'invite'])->name('guests.invite');
         Route::post('/{weddingSlug}/invite/{guestSlug}', [GuestController::class, 'submitNote'])->name('guests.submitNote');
     })->whereIn('locale', ['en', 'my', 'my_BLK']);

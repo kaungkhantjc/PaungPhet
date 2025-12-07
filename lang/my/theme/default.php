@@ -3,6 +3,7 @@
 return [
     'title' => ':partner_one နှင့် :partner_two တို့၏ မင်္ဂလာဧည့်ခံပွဲ',
     'event_subtitle' => 'တို့၏ မင်္ဂလာဧည့်ခံပွဲ',
+    'all_invitees_subtitle' => 'ခင်မင်လေးစားစွာ ဖိတ်ကြားအပ်ပါသည်',
     'invitee_subtitle' => 'အား ခင်မင်လေးစားစွာ ဖိတ်ကြားအပ်ပါသည်',
     'content_title' => 'မင်္ဂလာဧည့်ခံပွဲ ဖိတ်ကြားလွှာ',
     'prewedding_images_title' => 'အမှတ်တရ ဓာတ်ပုံများ',

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'share_wedding_url' => 'ဖန်းဖြယ် ပွယ်ꩻမင်္ဂလာႏ URL',
+    'share_wedding_url_title' => "ဖစ်လောဝ်းဟွိုန်ဒျာႏဩ။",
     'og_image' => 'ကာဗာပွုံꩻ',
     'address' => 'မင်္ဂလာႏခင်းလမ်း',
     'address_default' => '~ သီး လမ်းကိုဩ',

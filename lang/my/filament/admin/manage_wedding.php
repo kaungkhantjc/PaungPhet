@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'share_wedding_url' => 'မင်္ဂလာပွဲ URL မျှဝေမည်',
+    'share_wedding_url_title' => "ခင်မင်လေးစားစွာ ဖိတ်ကြားအပ်ပါသည်။",
     'og_image' => 'ကာဗာပုံ',
     'address' => 'မင်္ဂလာ နေရာ',
     'address_default' => '~ ၏ နေအိမ်မင်္ဂလာမဏ္ဍပ်သို့',
