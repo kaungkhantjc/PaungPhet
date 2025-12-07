@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/filament/admin/theme.css', 'resources/css/app.css', 'resources/js/app.js'])
 
     <style>
         body {
@@ -96,7 +96,7 @@
 
         <div class="glass-panel border border-white/50 p-8 rounded-3xl shadow-xl">
             <h2 class="font-script text-2xl text-center text-rose-600 mb-6">{{ __('theme/default.content_title') }}</h2>
-            <div class="prose prose-rose prose-lg mx-auto text-center text-slate-600 leading-loose">
+            <div class="prose mx-auto text-center text-slate-600 leading-loose">
                 {!! $wedding->content_renderer !!}
             </div>
         </div>
