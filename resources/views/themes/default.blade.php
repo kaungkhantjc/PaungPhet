@@ -1,3 +1,5 @@
+@use(App\Constants\SupportedLocale)
+
 <!doctype html>
 <html lang="{{ $locale }}">
 
@@ -77,6 +79,53 @@
     <canvas id="snow-canvas"></canvas>
 
     <main class="w-full min-h-screen relative">
+
+        {{-- Locale Switcher Component --}}
+        <div class="fixed top-5 right-5 z-50 group" tabindex="0">
+            @php
+                $currentRouteName = $guest ? 'guests.invite' : 'guests.show';
+                $baseParams = ['weddingSlug' => $wedding->slug];
+                if ($guest) $baseParams['guestSlug'] = $guest->slug;
+                $currentFlag = SupportedLocale::from($locale)->flag();
+            @endphp
+
+            {{-- Trigger Button --}}
+            <button class="glass-panel px-3 py-2 rounded-full flex items-center gap-2 transition-all hover:bg-white/80 hover:shadow-pink-200/50 hover:scale-105 active:scale-95 cursor-pointer">
+                <div class="w-6 h-6 rounded-full overflow-hidden shadow-sm border border-white">
+                    @svg("flag-4x3-$currentFlag", 'w-full h-full object-cover')
+                </div>
+                <x-heroicon-m-chevron-down class="w-4 h-4 text-pink-400 transition-transform duration-300 group-focus-within:rotate-180 group-hover:rotate-180" />
+            </button>
+
+            {{-- Dropdown Menu --}}
+            <div class="absolute right-0 mt-2 w-48 py-2 bg-white/95 backdrop-blur-xl border border-pink-200 rounded-2xl shadow-xl shadow-pink-100/50 opacity-0 invisible translate-y-2 transition-all duration-300 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 origin-top-right">
+
+                @foreach(SupportedLocale::all() as $loc)
+                    @php
+                        $isActive = $locale === $loc['code'];
+                        $url = route($currentRouteName, array_merge($baseParams, ['locale' => $loc['code']]));
+                    @endphp
+
+                    <a href="{{ $url }}"
+                       class="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-pink-50
+                      {{ $isActive ? 'bg-pink-50/50 text-pink-600 font-medium' : 'text-slate-600' }}">
+
+                        {{-- Flag --}}
+                        <div class="w-5 h-5 rounded-full overflow-hidden shadow-sm border border-pink-100 shrink-0">
+                            @svg("flag-4x3-{$loc['flag']}", 'w-full h-full object-cover')
+                        </div>
+
+                        {{-- Label --}}
+                        <span class="text-sm flex-1">{{ $loc['name'] }}</span>
+
+                        {{-- Checkmark for active --}}
+                        @if($isActive)
+                            <x-heroicon-m-check class="w-4 h-4 text-pink-400" />
+                        @endif
+                    </a>
+                @endforeach
+            </div>
+        </div>
 
         <div class="relative w-full h-[85vh] flex items-center justify-center overflow-hidden">
             @php

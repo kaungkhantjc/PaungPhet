@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\SupportedLocale;
 use App\Models\Guest;
 use App\Models\Wedding;
 use Illuminate\Http\Request;
@@ -43,6 +44,7 @@ class GuestController extends Controller
             'wedding' => $wedding,
             'guest' => $guest,
             'locale' => $locale,
+            'supportedLocales' => SupportedLocale::all()
         ]);
     }
 
