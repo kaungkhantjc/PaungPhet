@@ -162,7 +162,7 @@
                         <div class="swiper-wrapper">
                             @foreach($wedding->images as $image)
                                 <div class="swiper-slide">
-                                    <img src="{{ $image->url }}" alt="{{ $image->name }}" class="w-full h-full object-cover">
+                                    <img src="{{ $image->url }}" alt="{{ $image->name }}" class="rounded-[2rem] w-full h-full object-cover">
                                 </div>
                             @endforeach
                         </div>
@@ -270,10 +270,12 @@
 
     <script>
         // Initialize Swiper
-        var swiper = new Swiper(".mySwiper", {
+        new Swiper(".mySwiper", {
+            loop: true,
             spaceBetween: 30,
             centeredSlides: true,
-            effect: "fade",
+            effect: "coverflow",
+            speed: 1000,
             autoplay: {
                 delay: 3500,
                 disableOnInteraction: false,
@@ -281,6 +283,7 @@
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
+                dynamicBullets: true,
             },
         });
 
