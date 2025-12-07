@@ -132,7 +132,7 @@
 <canvas id="petals-canvas"></canvas>
 
 {{-- Locale Switcher --}}
-<div class="fixed top-6 right-6 z-[100] group">
+<div class="fixed top-6 right-6 z-[100]">
     @php
         $currentRouteName = $guest ? 'guests.invite' : 'guests.show';
         $baseParams = ['weddingSlug' => $wedding->slug, 'theme' => $theme];
@@ -142,8 +142,9 @@
     @endphp
 
     <div class="relative">
-        <button
-            class="glass-card shadow-sm px-4 py-2.5 rounded-full flex items-center gap-2 transition-all hover:shadow-xl hover:scale-105">
+        {{-- Button: Added ID --}}
+        <button id="locale-btn"
+                class="glass-card shadow-sm px-4 py-2.5 rounded-full flex items-center gap-2 transition-all hover:shadow-xl hover:scale-105 cursor-pointer">
             <div class="w-5 h-5 rounded-full overflow-hidden shadow-sm">
                 @svg("flag-4x3-$currentFlag", 'w-full h-full object-cover')
             </div>
@@ -151,8 +152,9 @@
             <x-heroicon-m-chevron-down class="w-3 h-3 text-gray-500"/>
         </button>
 
-        <div
-            class="absolute right-0 mt-2 w-40 py-2 glass-card shadow-2xl rounded-2xl opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
+        {{-- Dropdown: Added ID and Removed group-hover classes --}}
+        <div id="locale-dropdown"
+             class="absolute right-0 mt-2 w-40 py-2 glass-card shadow-2xl rounded-2xl opacity-0 invisible translate-y-2 transition-all duration-200">
             @foreach(SupportedLocale::all() as $loc)
                 @php
                     $isActive = $locale === $loc['code'];
@@ -548,6 +550,41 @@
         init();
         animate();
     })();
+
+    // Locale Switcher Logic (Vanilla JS)
+    (function() {
+        const btn = document.getElementById('locale-btn');
+        const menu = document.getElementById('locale-dropdown');
+        let isOpen = false;
+
+        function toggleMenu(show) {
+            isOpen = show;
+            if (show) {
+                // Remove hidden state classes
+                menu.classList.remove('opacity-0', 'invisible', 'translate-y-2');
+                // Add visible state classes
+                menu.classList.add('opacity-100', 'visible', 'translate-y-0');
+            } else {
+                // Revert to hidden state
+                menu.classList.add('opacity-0', 'invisible', 'translate-y-2');
+                menu.classList.remove('opacity-100', 'visible', 'translate-y-0');
+            }
+        }
+
+        // Toggle on button click
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu(!isOpen);
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (isOpen && !btn.contains(e.target) && !menu.contains(e.target)) {
+                toggleMenu(false);
+            }
+        });
+    })();
+
 </script>
 </body>
 </html>
