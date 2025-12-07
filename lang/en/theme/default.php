@@ -2,9 +2,9 @@
 
 return [
     'title' => 'Wedding of :partner_one & :partner_two',
-    'event_subtitle' => 'Love Story',
-    'all_invitees_subtitle' => 'Sincerely Invite You to Our Wedding',
-    'invitee_subtitle' => 'Sincerely Invite You to Our Wedding',
+    'event_subtitle' => 'Love Story 👩‍❤️‍👨',
+    'all_invitees_subtitle' => 'Sincerely Invite You to Our Wedding 💛',
+    'invitee_subtitle' => 'Sincerely Invite You to Our Wedding 💛',
     'content_title' => 'Our Story',
     'prewedding_images_title' => 'Our Moments',
     'address' => 'The Venue',

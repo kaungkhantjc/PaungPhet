@@ -3,7 +3,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.4",
@@ -13,6 +16,7 @@
         "laravel/tinker": "^2.10.1",
         "league/flysystem-aws-s3-v3": "3.0",
         "spatie/laravel-translatable": "^6.12",
+        "stijnvanouplines/blade-country-flags": "dev-main as 1.0.6",
         "tapp/filament-social-share": "dev-main"
     },
     "require-dev": {
@@ -31,6 +35,13 @@
         {
             "type": "vcs",
             "url": "https://github.com/kaungkhantjc/filament-social-share"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/KhunHtetzNaing/blade-country-flags",
+            "options": {
+                "symlink": true
+            }
         }
     ],
     "autoload": {
