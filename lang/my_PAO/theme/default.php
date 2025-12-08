@@ -4,6 +4,7 @@ return [
     'title' => ':partner_one တွမ်ႏ :partner_two သီး ပွယ်ꩻမင်္ဂလာႏစေနေင်းယာ',
     'event_subtitle' => 'သီး ပွယ်ꩻမင်္ဂလာႏစေနေင်းယာ 👩‍❤️‍👨',
     'all_invitees_subtitle' => 'ကားကအဝ်ႏ ဖစ်လောဝ်းဟွိုန်ဒျာႏဩ 💛',
+    'invitee_description' => 'ဖစ်လောဝ်းဟွိုန်ဒျာႏ :name ဩ 💛',
     'invitee_subtitle' => 'ဖစ်လောဝ်းဟွိုန်ဒျာႏဩ 💛',
     'content_title' => 'စေနေင်းယာလိတ်ဖစ်',
     'prewedding_images_title' => 'အမတ်တရဓာတ်ပွုံꩻဖုံႏ',

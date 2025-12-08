@@ -13,7 +13,14 @@
     <title>{{ $title }}</title>
 
     <meta property="og:title" content="{{ $title }}">
-    <meta property="og:description" content="You are invited to our special day!">
+    
+    {{-- Description --}}
+    @if($guest)
+        <meta property="og:description" content="{{ __('theme/default.invitee_description', ['name' => $guest->name]) }}">
+    @else
+        <meta property="og:description" content="{{ __('theme/default.all_invitees_subtitle') }}">
+    @endif
+
     <meta property="og:image" content="{{ $wedding->og_image_url }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
