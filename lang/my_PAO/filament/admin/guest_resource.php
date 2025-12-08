@@ -6,6 +6,7 @@ return [
     'share_invitation_title' => ":name ဖစ်လောဝ်းဟွိုန်ဒျာႏဩ။",
     'share_my_url' => 'ဖန်းဖြယ် မန်ႏ URL',
     'share_my_PAO_url' => 'ဖန်းဖြယ် ပအိုဝ်ႏ URL',
+    'share_my_SHN_url' => 'ဖန်းဖြယ် ဖြဝ်ꩻ URL',
     'share_en_url' => 'ဖန်းဖြယ် အင်္ဂလိတ် URL',
 
     'model_label' => 'လိတ်ဖစ်',

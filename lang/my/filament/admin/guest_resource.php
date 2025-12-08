@@ -6,6 +6,7 @@ return [
     'share_invitation_title' => ":name အား ခင်မင်လေးစားစွာ ဖိတ်ကြားအပ်ပါသည်။",
     'share_my_url' => 'မြန်မာ URL မျှဝေမည်',
     'share_my_PAO_url' => 'ပအိုဝ်း URL မျှဝေမည်',
+    'share_my_SHN_url' => 'ရှမ်း URL မျှဝေမည်',
     'share_en_url' => 'English URL မျှဝေမည်',
 
     'model_label' => 'ဖိတ်စာ',
