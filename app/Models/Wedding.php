@@ -19,6 +19,7 @@ class Wedding extends Model
         'event_date',
         'address_url',
         'og_image_path',
+        'bg_image_path',
 
         'partner_one',
         'partner_two',
@@ -60,6 +61,11 @@ class Wedding extends Model
     public function getOgImageUrlAttribute(): string
     {
         return Storage::disk('public')->url($this->og_image_path);
+    }
+
+    public function getBgImageUrlAttribute(): string
+    {
+        return Storage::disk('public')->url($this->bg_image_path);
     }
 
     public function getContentRendererAttribute(): string

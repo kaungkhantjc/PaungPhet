@@ -6,20 +6,17 @@
 <head>
     @php
         $title = __('theme/default.title', ['partner_one' => $wedding->partner_one, 'partner_two' => $wedding->partner_two]);
+        $description = $guest
+            ? __('theme/default.invitee_description', ['name' => $guest->name])
+            : __('theme/default.all_invitees_subtitle');
     @endphp
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title }}</title>
 
-    <meta property="og:title" content="{{ $title }}">
-    
-    {{-- Description --}}
-    @if($guest)
-        <meta property="og:description" content="{{ __('theme/default.invitee_description', ['name' => $guest->name]) }}">
-    @else
-        <meta property="og:description" content="{{ __('theme/default.all_invitees_subtitle') }}">
-    @endif
+    <meta property="og:title" content="{{ $description }}">
+    <meta property="og:description" content="{{ $title }}">
 
     <meta property="og:image" content="{{ $wedding->og_image_url }}">
     <meta property="og:url" content="{{ url()->current() }}">
@@ -136,7 +133,7 @@
 
         <div class="relative w-full h-[85vh] flex items-center justify-center overflow-hidden">
             @php
-                $heroImage = $wedding->og_image_url;
+                $heroImage = $wedding->bg_image_url;
             @endphp
             <div class="absolute inset-0 z-0">
                 <img src="{{ $heroImage }}"

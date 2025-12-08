@@ -6,14 +6,17 @@
 <head>
     @php
         $title = __('theme/default.title', ['partner_one' => $wedding->partner_one, 'partner_two' => $wedding->partner_two]);
+        $description = $guest
+            ? __('theme/default.invitee_description', ['name' => $guest->name])
+            : __('theme/default.all_invitees_subtitle');
     @endphp
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title }}</title>
 
-    <meta property="og:title" content="{{ $title }}">
-    <meta property="og:description" content="You are invited to our special day!">
+    <meta property="og:title" content="{{ $description }}">
+    <meta property="og:description" content="{{ $title }}">
     <meta property="og:image" content="{{ $wedding->og_image_url }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
@@ -178,7 +181,7 @@
     <div class="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
         {{-- Background Image with Overlay --}}
         <div class="absolute inset-0 z-0">
-            <img src="{{ $wedding->og_image_url }}"
+            <img src="{{ $wedding->bg_image_url }}"
                  class="w-full h-full object-cover"
                  alt="Wedding Background">
             <div class="absolute inset-0 bg-gradient-to-b from-pink-50/60 via-white/70 to-blue-50/60"></div>

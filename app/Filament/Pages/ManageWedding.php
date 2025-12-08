@@ -110,10 +110,9 @@ class ManageWedding extends Page implements HasForms
                     ->schema([
                         Flex::make([
                             TextInput::make('slug')
-                                ->inlineLabel()
                                 ->required()
                                 ->unique(table: 'weddings', column: 'slug', ignorable: fn() => auth()->user()->wedding)
-                                ->prefix(config('app.url') . '/' . app()->getLocale() . '/')
+                                ->hint(config('app.url') . '/' . app()->getLocale() . '/')
                                 ->placeholder('mg-and-may')
                                 ->grow(),
                             ActionGroup::make([
@@ -122,8 +121,8 @@ class ManageWedding extends Page implements HasForms
                                 self::createShareAction(label: __('filament/admin/guest_resource.share_my_PAO_url'), locale: 'my_PAO'),
                                 self::createShareAction(label: __('filament/admin/guest_resource.share_my_SHN_url'), locale: 'my_SHN'),
                             ])->icon(Heroicon::OutlinedShare)
-                                ->label(' - '),
-                        ])->columnSpanFull()->verticalAlignment(VerticalAlignment::Center),
+                                ->hiddenLabel(),
+                        ])->columnSpanFull()->verticalAlignment(VerticalAlignment::Start),
 
                         DatePicker::make('event_date')
                             ->label(__('filament/admin/manage_wedding.event_date'))
@@ -143,8 +142,17 @@ class ManageWedding extends Page implements HasForms
                             ->required()
                             ->imageCropAspectRatio('16:9')
                             ->maxSize(5 * 1024 * 1024)
+                            ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/jpg']),
+
+                        FileUpload::make('bg_image_path')
+                            ->label(__('filament/admin/manage_wedding.bg_image'))
+                            ->directory('weddings/' . auth()->id() . '/bg-images')
+                            ->disk('public')
+                            ->image()
+                            ->imageEditor()
+                            ->required()
+                            ->maxSize(5 * 1024 * 1024)
                             ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/jpg'])
-                            ->columnSpanFull()
                     ])
                     ->columnSpanFull(),
 

@@ -4,6 +4,7 @@ return [
     'share_wedding_url' => 'Share Wedding URL',
     'share_wedding_url_title' => "We're so pleased to invite you!",
     'og_image' => 'OG Image',
+    'bg_image' => 'Background Image',
     'address' => 'Address',
     'address_default' => 'To the wedding pavilion at the residence of ~',
     'address_url' => 'Address Map URL',

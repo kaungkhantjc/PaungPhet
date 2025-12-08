@@ -4,6 +4,7 @@ return [
     'share_wedding_url' => 'မင်္ဂလာပွဲ URL မျှဝေမည်',
     'share_wedding_url_title' => "ခင်မင်လေးစားစွာ ဖိတ်ကြားအပ်ပါသည်။",
     'og_image' => 'ကာဗာပုံ',
+    'bg_image' => 'နောက်ခံပုံ',
     'address' => 'မင်္ဂလာ နေရာ',
     'address_default' => '~ ၏ နေအိမ်မင်္ဂလာမဏ္ဍပ်သို့',
     'address_url' => 'မင်္ဂလာ နေရာ Map URL',
