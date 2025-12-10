@@ -1,3 +1,24 @@
+<?php
+/*
+ * Copyright (c) 2025 Kaung Khant Kyaw and Khun Htetz Naing.
+ *
+ * This file is part of the PaungPhet app.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+?>
+
 @use(App\Constants\SupportedLocale)
 
     <!doctype html>
@@ -130,13 +151,23 @@
 
         /* Toast Animation */
         @keyframes slideDownFade {
-            0% { transform: translateY(-100%); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         @keyframes fadeOut {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
         }
 
         .animate-toast-enter {
@@ -156,13 +187,15 @@
 {{-- Toast Notification --}}
 @if(session('success'))
     <div id="toast-wrapper" class="fixed top-18 left-0 w-full flex justify-center z-[150] pointer-events-none">
-        <div id="toast-notification" class="pointer-events-auto bg-white/80 backdrop-blur-xl border border-pink-100 shadow-2xl shadow-pink-200/50 rounded-full px-6 py-3 flex items-center gap-3 animate-toast-enter">
+        <div id="toast-notification"
+             class="pointer-events-auto bg-white/80 backdrop-blur-xl border border-pink-100 shadow-2xl shadow-pink-200/50 rounded-full px-6 py-3 flex items-center gap-3 animate-toast-enter">
             <div class="bg-gradient-to-br from-pink-100 to-blue-100 rounded-full p-1">
-                <x-heroicon-m-check class="w-4 h-4 text-pink-500" />
+                <x-heroicon-m-check class="w-4 h-4 text-pink-500"/>
             </div>
             <span class="gradient-text font-semibold text-sm">{{ session('success') }}</span>
-            <button onclick="closeToast()" class="ml-2 text-gray-400 hover:text-pink-500 transition-colors cursor-pointer">
-                <x-heroicon-m-x-mark class="w-4 h-4" />
+            <button onclick="closeToast()"
+                    class="ml-2 text-gray-400 hover:text-pink-500 transition-colors cursor-pointer">
+                <x-heroicon-m-x-mark class="w-4 h-4"/>
             </button>
         </div>
     </div>

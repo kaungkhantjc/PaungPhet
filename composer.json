@@ -7,7 +7,19 @@
         "laravel",
         "framework"
     ],
-    "license": "MIT",
+    "license": "AGPL-3.0-only",
+    "authors": [
+        {
+            "name": "Kaung Khant Kyaw",
+            "email": "kaungkhantjc@gmail.com",
+            "role": "Lead Developer"
+        },
+        {
+            "name": "Khun Htetz Naing",
+            "email": "khunhtetznaing@gmail.com",
+            "role": "Co-Developer"
+        }
+    ],
     "require": {
         "php": "^8.4",
         "craft-forge/filament-language-switcher": "^1.0",
