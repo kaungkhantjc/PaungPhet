@@ -23,9 +23,13 @@ use App\Http\Controllers\GuestController;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/{locale?}', function (?string $locale = null) {
+    return view('welcome', [
+        'locale' => $locale ?? SupportedLocale::MY->value,
+        'supportedLocales' => SupportedLocale::all(),
+    ]);
+})->whereIn('locale', SupportedLocale::values())
+    ->middleware(SetLocale::class)->name('welcome');
 
 Route::prefix('{locale}')
     ->whereIn('locale', SupportedLocale::values())

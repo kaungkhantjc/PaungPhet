@@ -1,0 +1,56 @@
+@import 'tailwindcss' source(none);
+@source '../views/welcome.blade.php';
+
+@theme {
+    /* Fonts */
+    --font-sans: 'Google Sans', sans-serif;
+    --font-serif: 'MyanmarHopong', serif;
+
+    /* Colors */
+    --color-primary: #ec4899;   /* Pink 500 */
+    --color-secondary: #3b82f6; /* Blue 500 */
+
+    /* Animations */
+    --animate-float: float 3s ease-in-out infinite;
+    --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+}
+
+/* Custom Utilities */
+
+.aurora-bg {
+    background: linear-gradient(180deg, #fefcff 0%, #fef3f8 50%, #f0f9ff 100%);
+}
+
+.glass-nav {
+    @apply bg-white/85 backdrop-blur-md border-b border-white/50;
+}
+
+.glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.05)];
+}
+
+.gradient-text {
+    @apply bg-linear-to-br from-primary to-secondary text-transparent bg-clip-text;
+}
+
+#petals-canvas {
+    @apply fixed top-0 left-0 w-full h-full pointer-events-none z-0;
+}
+
+/* Hide scrollbar for cleaner look */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
