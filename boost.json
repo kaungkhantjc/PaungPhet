@@ -5,8 +5,12 @@
         "gemini"
     ],
     "editors": [
+        "codex",
+        "gemini",
         "phpstorm",
         "vscode"
     ],
-    "guidelines": []
+    "guidelines": [
+        "filament/filament"
+    ]
 }
